@@ -19,6 +19,6 @@ abstract class AbstractTestRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         $className = 'App\\Entity\\' . preg_replace('/(App|Repository|\\\)/', '', get_class($this));
-        parent::__construct($registry, $className);
+        parent::__construct($registry, $className); // Possible classes: StartTest, MiddleTest, FinalTest
     }
 }

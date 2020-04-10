@@ -4,4 +4,28 @@ app_homepage:
     options:
         expose: true
     defaults:
-        _controller: App\Controller\HomepageController::homepage
+        _controller: App\Controller\HomepageController::factoryPattern
+
+app_trait:
+    path: /traits
+    methods: [GET, POST]
+    options:
+        expose: true
+    defaults:
+        _controller: App\Controller\HomepageController::trait
+
+app_adapter:
+  path: /adapter
+  methods: [GET, POST]
+  options:
+    expose: true
+  defaults:
+    _controller: App\Controller\HomepageController::adapterPattern
+
+app_decorator:
+  path: /decorator
+  methods: [GET, POST]
+  options:
+    expose: true
+  defaults:
+    _controller: App\Controller\HomepageController::decoratorPattern
