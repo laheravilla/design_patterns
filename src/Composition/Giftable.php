@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Entity;
+
+namespace App\Composition;
 
 /**
  * Traits define a behaviour of an object, so no need
@@ -10,7 +11,7 @@ namespace App\Entity;
  * Can use all traits you want in a class by separating them with commas
  * Traits cans extend another traits as well
  * Trait Giftable
- * @package App\Entity
+ * @package App\Composition
  */
 trait Giftable
 {

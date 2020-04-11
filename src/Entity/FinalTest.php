@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Composition\Giftable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
