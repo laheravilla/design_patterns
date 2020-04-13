@@ -7,6 +7,7 @@ use App\Decorator\TextDecorator;
 use App\Entity\PrintText;
 use App\Entity\TestFactory;
 use App\Controller\Hello;
+use App\Event\Emitter;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -31,7 +32,7 @@ class HomepageController extends AbstractController
      * Adapter design pattern
      * Adapt an outsider class
      */
-    public function adapterPattern()
+    public function adapterPatternIndex()
     {
         //$cache = new Cache(); // My cache logic
 
@@ -46,7 +47,7 @@ class HomepageController extends AbstractController
      * Decorator design pattern
      * Add functionality to another class
      */
-    public function decoratorPattern()
+    public function decoratorPatternIndex()
     {
         $text = new PrintText();
         $content = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
@@ -64,7 +65,7 @@ class HomepageController extends AbstractController
      * Example of object instantiation with Factory Design Pattern
      * @return Response
      */
-    public function factoryPattern(): Response
+    public function factoryPatternIndex(): Response
     {
         // No need to inject repositories
         $startTests = TestFactory::getTestRepository('start', $this->registry)->findAll();
@@ -86,10 +87,28 @@ class HomepageController extends AbstractController
     /**
      * Show trait functioning
      */
-    public function trait()
+    public function traitIndex()
     {
         $finalTest = TestFactory::getTest('Final');
         $finalTest->setGift(true);
-        dd($finalTest);
+        //dd($finalTest);
+
+        return $this->render('base.html.twig', ['finalTest' => $finalTest]);
+    }
+
+    /**
+     * Event need Singleton design pattern to be implemented
+     */
+    public function eventIndex()
+    {
+        $emitter = Emitter::getInstance();
+
+        $emitter->on('Comment.created', function ($firstname, $lastname) {
+            dump($firstname . ' ' . $lastname . ' has posted a new comment');
+        });
+
+        $emitter->emit('Comment.created', 'John', 'Doe');
+        //$emitter->emit('User.new');
+        dd($emitter);
     }
 }
