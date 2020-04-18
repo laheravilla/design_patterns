@@ -7,7 +7,9 @@ use App\Decorator\TextDecorator;
 use App\Entity\PrintText;
 use App\Entity\TestFactory;
 use App\Controller\Hello;
-use App\Event\Emitter;
+use App\Observer\Message;
+use App\Observer\TestEvent;
+use App\Observer\TestResultEvent;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -97,18 +99,16 @@ class HomepageController extends AbstractController
     }
 
     /**
-     * Event need Singleton design pattern to be implemented
+     * Observer Design Pattern
+     * Composed by two subjects: the observable and the observer
      */
-    public function eventIndex()
+    public function observerIndex()
     {
-        $emitter = Emitter::getInstance();
+        $test= new TestResultEvent(); // Observable
+        $message = new Message($test); // Observer
 
-        $emitter->on('Comment.created', function ($firstname, $lastname) {
-            dump($firstname . ' ' . $lastname . ' has posted a new comment');
-        });
-
-        $emitter->emit('Comment.created', 'John', 'Doe');
-        //$emitter->emit('User.new');
-        dd($emitter);
+        $test->setStatus(5);
+        $test->setStatus(2);
+        die;
     }
 }

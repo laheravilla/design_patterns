@@ -31,9 +31,9 @@ app_decorator:
     _controller: App\Controller\HomepageController::decoratorPatternIndex
 
 app_event:
-  path: /event
+  path: /observer
   methods: [GET, POST]
   options:
     expose: true
   defaults:
-    _controller: App\Controller\HomepageController::eventIndex
+    _controller: App\Controller\HomepageController::observerIndex
