@@ -37,3 +37,11 @@ app_event:
     expose: true
   defaults:
     _controller: App\Controller\HomepageController::observerIndex
+
+app_strategy:
+  path: /strategy
+  methods: [GET, POST]
+  options:
+    expose: true
+  defaults:
+    _controller: App\Controller\HomepageController::strategyIndex

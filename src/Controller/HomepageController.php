@@ -6,13 +6,14 @@ use App\Adapter\DoctrineCacheAdapter;
 use App\Decorator\CaramelDecorator;
 use App\Decorator\ChocolateDecorator;
 use App\Decorator\Decaf;
-use App\Decorator\TextDecorator;
-use App\Entity\PrintText;
 use App\Entity\TestFactory;
 use App\Controller\Hello;
 use App\Observer\Message;
-use App\Observer\TestEvent;
 use App\Observer\TestResultEvent;
+use App\Strategy\Context;
+use App\Strategy\OperationAdd;
+use App\Strategy\OperationMultiply;
+use App\Strategy\OperationSubstract;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -111,6 +112,19 @@ class HomepageController extends AbstractController
 
         $test->setStatus(5);
         $test->setStatus(2);
+        die;
+    }
+
+    public function strategyIndex()
+    {
+        $context = new Context(new OperationAdd(10, 5));
+        dump('10 + 5 = ' . $context->executeStrategy());
+
+        $context = new Context(new OperationSubstract(10, 5));
+        dump('10 - 5 = ' . $context->executeStrategy());
+
+        $context = new Context(new OperationMultiply(10, 5));
+        dump('10 * 5 = ' . $context->executeStrategy());
         die;
     }
 }
