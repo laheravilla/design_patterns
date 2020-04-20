@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Adapter\DoctrineCacheAdapter;
+use App\Decorator\CaramelDecorator;
+use App\Decorator\ChocolateDecorator;
+use App\Decorator\Decaf;
 use App\Decorator\TextDecorator;
 use App\Entity\PrintText;
 use App\Entity\TestFactory;
@@ -51,16 +54,15 @@ class HomepageController extends AbstractController
      */
     public function decoratorPatternIndex()
     {
-        $text = new PrintText();
-        $content = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-        voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate
-        non provident, similique sunt in culpa qui officia deserunt mollitia animi';
-        $text->setText($content);
+        $beverage = new Decaf();
+        $withCaramel = new CaramelDecorator($beverage);
+        $withChoco = new ChocolateDecorator($beverage);
+        dump($withCaramel->getName());
+        dump($withCaramel->getCost());
 
-        $textDecorated = new TextDecorator($text); // Accept object to be decorated
-
-        dump($text->getText());
-        dd($textDecorated->textToUppercase());
+        dump($withChoco->getName());
+        dump($withChoco->getCost());
+        die;
     }
 
     /**
